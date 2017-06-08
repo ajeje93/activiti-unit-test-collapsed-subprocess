@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+	xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+	typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+	targetNamespace="http://www.activiti.org/test">
+
+	<process id="externalSubProcess">
+
+		<startEvent id="theStart" />
+		<sequenceFlow id="flow1" sourceRef="theStart" targetRef="verifyIgnitionOn" />
+
+		<userTask id="verifyIgnitionOn" name="Verify ignition on." />
+		<sequenceFlow id="flow2" sourceRef="verifyIgnitionOn"
+			targetRef="confirmIgnitionOn" />
+
+		<exclusiveGateway id="confirmIgnitionOn" />
+		<sequenceFlow id="flow3" sourceRef="confirmIgnitionOn"
+			targetRef="feedbackTask">
+			<conditionExpression><![CDATA[${!ignitionOn}]]></conditionExpression>
+		</sequenceFlow>
+		<sequenceFlow id="flow4" sourceRef="confirmIgnitionOn"
+			targetRef="normalEnd">
+			<conditionExpression><![CDATA[${ignitionOn}]]></conditionExpression>
+		</sequenceFlow>
+
+		<userTask id="feedbackTask" name="Ignition not activated." />
+		<sequenceFlow id="flow5" sourceRef="feedbackTask"
+			targetRef="endEvent" />
+		<endEvent id="endEvent" />
+
+		<endEvent id="normalEnd" />
+
+	</process>
+
+</definitions>

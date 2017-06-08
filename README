@@ -1,0 +1,1 @@
+Activiti unit test that calls a collapsed subprocess using a call activity.
