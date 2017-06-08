@@ -1,1 +1,4 @@
 Activiti unit test that calls a collapsed subprocess using a call activity.
+Useful links: 
+https://community.alfresco.com/thread/217728-subprocess-definition-in-a-separate-xml#comment-775919
+https://www.activiti.org/userguide/#bpmnCallActivity
